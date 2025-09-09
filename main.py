@@ -131,19 +131,43 @@ def play_game(language, difficulty):
 
 
 def main():
+    translations = {
+        "en": {
+            "interface_language": "Interface Language",
+            "language_to_learn": "Language to Learn",
+            "difficulty": "Difficulty",
+            "game_start": "Starting the game..."
+        },
+        "fr": {
+            "interface_language": "Langue de l'interface",
+            "language_to_learn": "Langue à apprendre",
+            "difficulty": "Difficulté",
+            "game_start": "Démarrage du jeu..."
+        },
+        "de": {
+            "interface_language": "gewählte Sprache",
+            "language_to_learn": "Sprache zum Lernen",
+            "difficulty": "Schwierigkeit",
+            "game_start": "Spiel wird gestartet..."
+        }
+    }
+
     interface_language = language_chooser()
     language_to_learn = language_to_learn_chooser(interface_language)
     if not language_to_learn:
         print("Invalid language choice. Exiting.")
         return
     difficulty = gamemode_chooser(interface_language)
-    print(f"Interface Language: {interface_language}")
-    print(f"Language to Learn: {language_to_learn}")
-    print(f"Difficulty: {difficulty}\n")
 
-    # starts the game
+    # get right translation for summary
+    t = translations[interface_language]
+    print(f"{t['interface_language']}: {interface_language}")
+    print(f"{t['language_to_learn']}: {language_to_learn}")
+    print(f"{t['difficulty']}: {difficulty}\n")
+    print(t["game_start"])
+
+    # Start the game
     play_game(language_to_learn, difficulty)
-
 
 if __name__ == "__main__":
     main()
