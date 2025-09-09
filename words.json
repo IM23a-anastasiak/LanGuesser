@@ -1,0 +1,50 @@
+{
+    "en": [
+        {
+            "sentence": "I would like to ____ a book.",
+            "answer": "read",
+            "easy_options": ["read", "write", "eat"],
+            "medium_options": ["r__d", "wr__e", "e__"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "She is going to the _____ to buy groceries.",
+            "answer": "store",
+            "easy_options": ["store", "park", "school"],
+            "medium_options": ["s_o__", "p__k", "s_ho__"],
+            "difficulty": "all"
+        }
+    ],
+    "fr": [
+        {
+            "sentence": "Je vais ____ un livre.",
+            "answer": "lire",
+            "easy_options": ["lire", "écrire", "manger"],
+            "medium_options": ["l__e", "éc__r_", "ma___r"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Elle va au _______ pour acheter des légumes.",
+            "answer": "magasin",
+            "easy_options": ["magasin", "parc", "école"],
+            "medium_options": ["mag___n", "p__c", "é__l_"],
+            "difficulty": "all"
+        }
+    ],
+    "de": [
+        {
+            "sentence": "Ich möchte ein Buch _____.",
+            "answer": "lesen",
+            "easy_options": ["lesen", "schreiben", "essen"],
+            "medium_options": ["le__n", "sc__e__en", "e_se_"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Sie geht zum _____, um Lebensmittel zu kaufen.",
+            "answer": "Laden",
+            "easy_options": ["Laden", "Park", "Schule"],
+            "medium_options": ["L_de_", "P__k", "Sc___e"],
+            "difficulty": "all"
+        }
+    ]
+}

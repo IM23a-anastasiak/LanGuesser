@@ -1,3 +1,6 @@
+import json
+
+
 def language_chooser():
     while True:
         print("Choose a language / Choisissez une langue / Wähle eine Sprache:")
@@ -16,6 +19,7 @@ def language_chooser():
             return 'de'
         else:
             print("Invalid choice. Please enter 1, 2, or 3.\n")
+
 
 def language_to_learn_chooser(lang):
     while True:
@@ -47,6 +51,7 @@ def language_to_learn_chooser(lang):
         else:
             print("Invalid choice. Please enter 1 or 2.\n")
 
+
 def gamemode_chooser(lang):
     while True:
         if lang == 'en':
@@ -77,6 +82,54 @@ def gamemode_chooser(lang):
         else:
             print("Invalid choice. Please enter 1, 2, or 3.\n")
 
+
+import json
+
+
+def play_game(language, difficulty):
+    # Loads the JSON data from words.json
+    with open('words.json', 'r') as file:
+        data = json.load(file)
+
+    if language not in data:
+        print("Language not supported.")
+        return
+
+    questions = data[language]
+    total_score = 0
+
+    for question in questions:
+        print("\n" + question["sentence"])
+        attempts = 0
+        points = 2  # Starts with 2 points for the first attempt
+
+        if difficulty == "easy":  # easy mode
+            options = question["easy_options"]
+        elif difficulty == "medium":  # medium mode
+            options = question["medium_options"]
+        else:  # Hard mode
+            options = []
+
+        while attempts < 3:
+            if options:
+                print("Options:", ", ".join(options))
+
+            guess = input("Your answer: ").strip()
+            if guess.lower() == question["answer"].lower():
+                print("Correct!")
+                total_score += points
+                break
+            else:
+                print("Incorrect. Try again.")
+                attempts += 1
+                points = max(0, points - 1)  # Reduces points for wrong answer
+
+        if attempts == 3:
+            print(f"The correct answer was: {question['answer']}")
+
+    print(f"\nGame over! Your total score is: {total_score}")
+
+
 def main():
     interface_language = language_chooser()
     language_to_learn = language_to_learn_chooser(interface_language)
@@ -86,7 +139,11 @@ def main():
     difficulty = gamemode_chooser(interface_language)
     print(f"Interface Language: {interface_language}")
     print(f"Language to Learn: {language_to_learn}")
-    print(f"Difficulty: {difficulty}")
+    print(f"Difficulty: {difficulty}\n")
+
+    # starts the game
+    play_game(language_to_learn, difficulty)
+
 
 if __name__ == "__main__":
     main()
