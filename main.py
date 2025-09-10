@@ -1,3 +1,7 @@
+"""
+Language learning game module with multiple difficulty levels and language support.
+Handles game logic, scoring, and highscore management.
+"""
 import os
 import random
 import json
@@ -10,7 +14,7 @@ def load_highscore_data():
     """
     if os.path.exists('highscore.json'):
         if os.path.getsize('highscore.json') > 0:
-            with open('highscore.json', 'r') as file:
+            with open('highscore.json', 'r', encoding='utf-8') as file:
                 return json.load(file)
         else:
             return {}  # returns empty dict if highscore is empty
@@ -24,7 +28,7 @@ def save_highscore(highscore):
     :param highscore:
     :return:
     """
-    with open('highscore.json', 'w') as file:
+    with open('highscore.json', 'w', encoding='utf-8') as file:
         json.dump(highscore, file, indent=4)
 
 
@@ -39,7 +43,7 @@ def reset_highscores(interface_language):
         "fr": "Les meilleurs scores ont été réinitialisés.",
         "de": "Die Highscores wurden zurückgesetzt."
     }
-    with open('highscore.json', 'w') as file:
+    with open('highscore.json', 'w', encoding='utf-8') as file:
         json.dump({}, file, indent=4)
     print(translations[interface_language] + "\n")
 
@@ -203,9 +207,7 @@ def play_game(language, difficulty, interface_language):
 
     t = translations[interface_language]
     questions = data[language]
-
-    # random questions
-    random.shuffle(questions)
+    random.shuffle(questions)  # random questions
     total_score = 0
 
     for question in questions:
