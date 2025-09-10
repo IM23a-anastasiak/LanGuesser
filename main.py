@@ -1,4 +1,5 @@
 import os
+import random
 
 
 def load_highscore_data():
@@ -15,6 +16,7 @@ def load_highscore_data():
 def save_highscore(highscore):
     with open('highscore.json', 'w') as file:
         json.dump(highscore, file, indent=4)
+
 
 def reset_highscores(interface_language):
     translations = {
@@ -168,6 +170,9 @@ def play_game(language, difficulty, interface_language):
 
     t = translations[interface_language]
     questions = data[language]
+
+    # random questions
+    random.shuffle(questions)
     total_score = 0
 
     for question in questions:
@@ -264,6 +269,7 @@ def main():
 
     # Start the game
     play_game(language_to_learn, difficulty, interface_language)
+
 
 if __name__ == "__main__":
     main()
