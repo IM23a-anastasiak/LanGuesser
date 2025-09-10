@@ -8,7 +8,7 @@ WORDS_FILE = "words.json"
 
 TRANSLATIONS = {
     "en": {
-        "app_title": "Language Trainer",
+        "app_title": "LanGuesser",
         "interface_language": "Interface Language",
         "language_to_learn": "Language to Learn",
         "difficulty": "Difficulty",
@@ -31,7 +31,7 @@ TRANSLATIONS = {
         "not_in_game": "Click 'Start Game' to begin.",
     },
     "fr": {
-        "app_title": "Entraîneur de langue",
+        "app_title": "LanGuesser",
         "interface_language": "Langue de l'interface",
         "language_to_learn": "Langue à apprendre",
         "difficulty": "Difficulté",
@@ -54,7 +54,7 @@ TRANSLATIONS = {
         "not_in_game": "Cliquez sur « Démarrer » pour commencer.",
     },
     "de": {
-        "app_title": "Sprachtrainer",
+        "app_title": "LanGuesser",
         "interface_language": "gewählte Sprache",
         "language_to_learn": "Sprache zum Lernen",
         "difficulty": "Schwierigkeit",
