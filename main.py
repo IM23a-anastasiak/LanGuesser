@@ -1,8 +1,13 @@
 import os
 import random
+import json
 
 
 def load_highscore_data():
+    """
+    Load highscore data from a JSON file.
+    :return:
+    """
     if os.path.exists('highscore.json'):
         if os.path.getsize('highscore.json') > 0:
             with open('highscore.json', 'r') as file:
@@ -14,11 +19,21 @@ def load_highscore_data():
 
 
 def save_highscore(highscore):
+    """
+    Save highscore data to a JSON file.
+    :param highscore:
+    :return:
+    """
     with open('highscore.json', 'w') as file:
         json.dump(highscore, file, indent=4)
 
 
 def reset_highscores(interface_language):
+    """
+    Reset highscores by clearing the JSON file.
+    :param interface_language:
+    :return:
+    """
     translations = {
         "en": "Highscores have been reset.",
         "fr": "Les meilleurs scores ont été réinitialisés.",
@@ -30,6 +45,10 @@ def reset_highscores(interface_language):
 
 
 def language_chooser():
+    """
+    Choose the interface language.
+    :return:
+    """
     while True:
         print("Choose a language / Choisissez une langue / Wähle eine Sprache:")
         print("1. English")
@@ -50,6 +69,11 @@ def language_chooser():
 
 
 def language_to_learn_chooser(lang):
+    """
+    Choose the language to learn.
+    :param lang:
+    :return:
+    """
     while True:
         if lang == 'en':
             print("Choose a language to learn:")
@@ -92,6 +116,11 @@ def language_to_learn_chooser(lang):
 
 
 def gamemode_chooser(lang):
+    """
+    Choose the game mode.
+    :param lang:
+    :return:
+    """
     while True:
         if lang == 'en':
             print("Choose a game mode:")
@@ -122,10 +151,14 @@ def gamemode_chooser(lang):
             print("Invalid choice. Please enter 1, 2, or 3.\n")
 
 
-import json
-
-
 def play_game(language, difficulty, interface_language):
+    """
+    Main game logic.
+    :param language:
+    :param difficulty:
+    :param interface_language:
+    :return:
+    """
     # Translations for messages
     translations = {
         "en": {
@@ -161,7 +194,7 @@ def play_game(language, difficulty, interface_language):
     }
 
     # Load the JSON data from words.json
-    with open('words.json', 'r') as file:
+    with open('words.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
 
     if language not in data:
@@ -220,6 +253,10 @@ def play_game(language, difficulty, interface_language):
 
 
 def main():
+    """
+    Main function to run the game.
+    :return:
+    """
     translations = {
         "en": {
             "interface_language": "Interface Language",
