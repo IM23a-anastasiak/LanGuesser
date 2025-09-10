@@ -1,4 +1,30 @@
-import json
+import os
+
+
+def load_highscore_data():
+    if os.path.exists('highscore.json'):
+        if os.path.getsize('highscore.json') > 0:
+            with open('highscore.json', 'r') as file:
+                return json.load(file)
+        else:
+            return {}  # returns empty dict if highscore is empty
+    else:
+        return {}
+
+
+def save_highscore(highscore):
+    with open('highscore.json', 'w') as file:
+        json.dump(highscore, file, indent=4)
+
+def reset_highscores(interface_language):
+    translations = {
+        "en": "Highscores have been reset.",
+        "fr": "Les meilleurs scores ont été réinitialisés.",
+        "de": "Die Highscores wurden zurückgesetzt."
+    }
+    with open('highscore.json', 'w') as file:
+        json.dump({}, file, indent=4)
+    print(translations[interface_language] + "\n")
 
 
 def language_chooser():
@@ -28,28 +54,39 @@ def language_to_learn_chooser(lang):
             print("1. French")
             print("2. German")
             choice = input("Enter 1 or 2: \n")
+            if choice == '1':
+                print("\n")
+                return 'fr'
+            elif choice == '2':
+                print("\n")
+                return 'de'
         elif lang == 'fr':
             print("Choisissez une langue à apprendre:")
             print("1. Anglais")
             print("2. Allemand")
             choice = input("Entrez 1 ou 2: \n")
+            if choice == '1':
+                print("\n")
+                return 'en'
+            elif choice == '2':
+                print("\n")
+                return 'de'
         elif lang == 'de':
             print("Wähle eine Sprache zum Lernen:")
             print("1. Englisch")
             print("2. Französisch")
-            choice = input(f"Geben Sie 1 oder 2 ein: \n")
+            choice = input("Geben Sie 1 oder 2 ein: \n")
+            if choice == '1':
+                print("\n")
+                return 'en'
+            elif choice == '2':
+                print("\n")
+                return 'fr'
         else:
             print("Invalid language. Exiting.\n")
             return None
 
-        if choice == '1':
-            print("\n")
-            return 'fr' if lang == 'en' else 'en'
-        elif choice == '2':
-            print("\n")
-            return 'de' if lang == 'en' else 'fr'
-        else:
-            print("Invalid choice. Please enter 1 or 2.\n")
+        print("Invalid choice. Please enter 1 or 2.\n")
 
 
 def gamemode_chooser(lang):
@@ -86,8 +123,42 @@ def gamemode_chooser(lang):
 import json
 
 
-def play_game(language, difficulty):
-    # Loads the JSON data from words.json
+def play_game(language, difficulty, interface_language):
+    # Translations for messages
+    translations = {
+        "en": {
+            "correct": "Correct!",
+            "incorrect": "Incorrect. Try again.",
+            "options": "Options",
+            "your_answer": "Your answer",
+            "game_over": "Game over! Your total score is",
+            "new_highscore": "New high score! Previous",
+            "highscore_remains": "High score remains",
+            "correct_answer": "The correct answer was"
+        },
+        "fr": {
+            "correct": "Correct!",
+            "incorrect": "Incorrect. Réessayez.",
+            "options": "Options",
+            "your_answer": "Votre réponse",
+            "game_over": "Jeu terminé! Votre score total est",
+            "new_highscore": "Nouveau meilleur score! Précédent",
+            "highscore_remains": "Le meilleur score reste",
+            "correct_answer": "La bonne réponse était"
+        },
+        "de": {
+            "correct": "Richtig!",
+            "incorrect": "Falsch. Versuchen Sie es erneut.",
+            "options": "Optionen",
+            "your_answer": "Ihre Antwort",
+            "game_over": "Spiel vorbei! Ihre Gesamtpunktzahl ist",
+            "new_highscore": "Neuer Highscore! Vorher",
+            "highscore_remains": "Highscore bleibt",
+            "correct_answer": "Die richtige Antwort war"
+        }
+    }
+
+    # Load the JSON data from words.json
     with open('words.json', 'r') as file:
         data = json.load(file)
 
@@ -95,39 +166,52 @@ def play_game(language, difficulty):
         print("Language not supported.")
         return
 
+    t = translations[interface_language]
     questions = data[language]
     total_score = 0
 
     for question in questions:
         print("\n" + question["sentence"])
         attempts = 0
-        points = 2  # Starts with 2 points for the first attempt
+        points = 2  # Start with 2 points for the first attempt
 
-        if difficulty == "easy":  # easy mode
+        if difficulty == "easy":
             options = question["easy_options"]
-        elif difficulty == "medium":  # medium mode
+        elif difficulty == "medium":
             options = question["medium_options"]
         else:  # Hard mode
             options = []
 
         while attempts < 3:
             if options:
-                print("Options:", ", ".join(options))
+                print(f"{t['options']}: {', '.join(options)}")
 
-            guess = input("Your answer: ").strip()
+            guess = input(f"{t['your_answer']}: ").strip()
             if guess.lower() == question["answer"].lower():
-                print("Correct!")
+                print(t["correct"])
                 total_score += points
                 break
             else:
-                print("Incorrect. Try again.")
                 attempts += 1
-                points = max(0, points - 1)  # Reduces points for wrong answer
+                points = max(0, points - 1)  # Reduce points for wrong answer
+                if attempts < 3:  # Only show retry message if attempts remain
+                    print(t["incorrect"])
 
         if attempts == 3:
-            print(f"The correct answer was: {question['answer']}")
+            print(f"{t['correct_answer']}: {question['answer']}")
 
-    print(f"\nGame over! Your total score is: {total_score}")
+    print(f"\n{t['game_over']}: {total_score}")
+
+    highscores = load_highscore_data()
+    if language not in highscores:
+        highscores[language] = 0
+
+    if total_score > highscores[language]:
+        print(f"{t['new_highscore']}: {highscores[language]}, {total_score}")
+        highscores[language] = total_score
+        save_highscore(highscores)
+    else:
+        print(f"{t['highscore_remains']}: {highscores[language]}")
 
 
 def main():
@@ -136,38 +220,50 @@ def main():
             "interface_language": "Interface Language",
             "language_to_learn": "Language to Learn",
             "difficulty": "Difficulty",
-            "game_start": "Starting the game..."
+            "game_start": "Starting the game...",
+            "reset_highscores": "Do you want to reset all highscores? (yes/no)"
         },
         "fr": {
             "interface_language": "Langue de l'interface",
             "language_to_learn": "Langue à apprendre",
             "difficulty": "Difficulté",
-            "game_start": "Démarrage du jeu..."
+            "game_start": "Démarrage du jeu...",
+            "reset_highscores": "Voulez-vous réinitialiser tous les meilleurs scores ? (oui/non)"
         },
         "de": {
             "interface_language": "gewählte Sprache",
             "language_to_learn": "Sprache zum Lernen",
             "difficulty": "Schwierigkeit",
-            "game_start": "Spiel wird gestartet..."
+            "game_start": "Spiel wird gestartet...",
+            "reset_highscores": "Möchten Sie alle Highscores zurücksetzen? (ja/nein)"
         }
     }
 
     interface_language = language_chooser()
+    t = translations[interface_language]
+
+    # Ask if the user wants to reset highscores
+    reset_choice = input(f"{t['reset_highscores']}: ").strip().lower()
+    if reset_choice in ['yes', 'oui', 'ja', 'y', 'o', 'j']:
+        reset_highscores(interface_language)
+
     language_to_learn = language_to_learn_chooser(interface_language)
     if not language_to_learn:
         print("Invalid language choice. Exiting.")
         return
-    difficulty = gamemode_chooser(interface_language)
+    difficulty_choice = gamemode_chooser(interface_language)
 
-    # get right translation for summary
-    t = translations[interface_language]
+    # Map difficulty choice to difficulty level
+    difficulty_map = {'1': 'easy', '2': 'medium', '3': 'hard'}
+    difficulty = difficulty_map.get(difficulty_choice, 'hard')
+
     print(f"{t['interface_language']}: {interface_language}")
     print(f"{t['language_to_learn']}: {language_to_learn}")
     print(f"{t['difficulty']}: {difficulty}\n")
     print(t["game_start"])
 
     # Start the game
-    play_game(language_to_learn, difficulty)
+    play_game(language_to_learn, difficulty, interface_language)
 
 if __name__ == "__main__":
     main()

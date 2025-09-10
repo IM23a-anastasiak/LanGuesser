@@ -3,31 +3,73 @@
         {
             "sentence": "I would like to ____ a book.",
             "answer": "read",
-            "easy_options": ["read", "write", "eat"],
-            "medium_options": ["r__d", "wr__e", "e__"],
+            "easy_options": ["read", "write", "buy"],
+            "medium_options": ["r__d", "w__te", "b__y"],
             "difficulty": "all"
         },
         {
             "sentence": "She is going to the _____ to buy groceries.",
             "answer": "store",
-            "easy_options": ["store", "park", "school"],
-            "medium_options": ["s_o__", "p__k", "s_ho__"],
+            "easy_options": ["store", "market", "mall"],
+            "medium_options": ["s__re", "m__ket", "m__l"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "He is playing fetch with his ___ in the park.",
+            "answer": "dog",
+            "easy_options": ["dog", "cat", "ball"],
+            "medium_options": ["d_g", "c_t", "b_ll"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "The sun rises in the ____.",
+            "answer": "east",
+            "easy_options": ["east", "west", "north"],
+            "medium_options": ["e__t", "w__t", "n_rth"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "She drinks a cup of ______ every morning.",
+            "answer": "coffee",
+            "easy_options": ["coffee", "tea", "milk"],
+            "medium_options": ["c_ff__e", "t__", "m_lk"],
             "difficulty": "all"
         }
     ],
     "fr": [
         {
-            "sentence": "Je vais ____ un livre.",
+            "sentence": "Je voudrais ____ un livre.",
             "answer": "lire",
-            "easy_options": ["lire", "écrire", "manger"],
-            "medium_options": ["l__e", "éc__r_", "ma___r"],
+            "easy_options": ["lire", "écrire", "acheter"],
+            "medium_options": ["l__e", "é__ire", "a__eter"],
             "difficulty": "all"
         },
         {
-            "sentence": "Elle va au _______ pour acheter des légumes.",
+            "sentence": "Elle va au _______ pour acheter des courses.",
             "answer": "magasin",
-            "easy_options": ["magasin", "parc", "école"],
-            "medium_options": ["mag___n", "p__c", "é__l_"],
+            "easy_options": ["magasin", "marché", "centre"],
+            "medium_options": ["m__asin", "m__ché", "c__tre"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Il joue à rapporter avec son _____ dans le parc.",
+            "answer": "chien",
+            "easy_options": ["chien", "chat", "balle"],
+            "medium_options": ["c__en", "c__t", "b__le"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Le soleil se lève à l'___.",
+            "answer": "est",
+            "easy_options": ["est", "ouest", "nord"],
+            "medium_options": ["e__t", "o__st", "n__d"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Elle boit une tasse de ____ chaque matin.",
+            "answer": "café",
+            "easy_options": ["café", "thé", "lait"],
+            "medium_options": ["c__é", "t__é", "l__t"],
             "difficulty": "all"
         }
     ],
@@ -35,15 +77,36 @@
         {
             "sentence": "Ich möchte ein Buch _____.",
             "answer": "lesen",
-            "easy_options": ["lesen", "schreiben", "essen"],
-            "medium_options": ["le__n", "sc__e__en", "e_se_"],
+            "easy_options": ["lesen", "schreiben", "kaufen"],
+            "medium_options": ["l__en", "s__reiben", "k__fen"],
             "difficulty": "all"
         },
         {
-            "sentence": "Sie geht zum _____, um Lebensmittel zu kaufen.",
+            "sentence": "Sie geht in den _____, um Lebensmittel zu kaufen.",
             "answer": "Laden",
-            "easy_options": ["Laden", "Park", "Schule"],
-            "medium_options": ["L_de_", "P__k", "Sc___e"],
+            "easy_options": ["Laden", "Markt", "Einkaufszentrum"],
+            "medium_options": ["L__en", "M__kt", "E__kaufszentrum"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Er spielt mit seinem ____ fangen im Park.",
+            "answer": "Hund",
+            "easy_options": ["Hund", "Katze", "Ball"],
+            "medium_options": ["H__d", "K__ze", "B__l"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Die Sonne geht im _____ auf.",
+            "answer": "Osten",
+            "easy_options": ["Osten", "Westen", "Norden"],
+            "medium_options": ["O__en", "W__ten", "N__den"],
+            "difficulty": "all"
+        },
+        {
+            "sentence": "Sie trinkt jeden Morgen eine Tasse ______.",
+            "answer": "Kaffee",
+            "easy_options": ["Kaffee", "Tee", "Milch"],
+            "medium_options": ["K__ffee", "T__e", "M__ch"],
             "difficulty": "all"
         }
     ]
